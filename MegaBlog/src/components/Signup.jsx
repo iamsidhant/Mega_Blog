@@ -1,4 +1,4 @@
-import React from 'react'
+import React, {useState} from 'react'
 import {Link, useNavigate} from "react-router-dom"
 import {useDispatch} from "react-redux"
 import {Button, Input, Logo} from "./index"
@@ -13,7 +13,7 @@ function Signup() {
     const {register, handleSubmit} = useForm()
 
     const create = async(data) => {
-        setError("/")
+        setError("")
         try {
             const userData = await authService.createAccount(data)
             if (userData) {
@@ -51,7 +51,7 @@ function Signup() {
                         <Input
                         label="Full Name: "
                         placeholder="Enter your full name"
-                        {...register, ("name", {
+                        {...register("name", {
                             required: true,
                         })}
                         />
@@ -59,7 +59,7 @@ function Signup() {
                         label="Email: "
                         placeholder="Enter your email"
                         type="email"
-                        {...register, ("email", {
+                        {...register("email", {
                             required: true,
                             validate: {
                                 matchPattern: (value) => /^\w+([.-]?\w+)*@\w+([.-]?\w+)*(\.\w{2,3})+$/.test(value) ||
@@ -71,7 +71,7 @@ function Signup() {
                         label="Password: "
                         type="password"
                         placeholder="Enter your password"
-                        {...register, ("password", {
+                        {...register("password", {
                             required: true,
                         })}
                         />
